@@ -33,7 +33,7 @@ function Stake() {
         return state.app.fiveDayRate;
     });
     const timeBalance = useSelector<IReduxState, string>(state => {
-        return state.account.balances.time;
+        return state.account.balances && state.account.balances.time;
     });
     const memoBalance = useSelector<IReduxState, string>(state => {
         return state.account.balances && state.account.balances.memo;
@@ -122,7 +122,7 @@ function Stake() {
                                         <div className="stake-card-apy">
                                             <p className="stake-card-metrics-title">APY</p>
                                             <p className="stake-card-metrics-value">
-                                                {stakingAPY ? <>{new Intl.NumberFormat("en-US").format(Number(trimmedStakingAPY))}%</> : <Skeleton width="150px" />}
+                                                {stakingAPY ? <>{new Intl.NumberFormat("en-US").format(Number(0))}%</> : <Skeleton width="150px" />}
                                             </p>
                                         </div>
                                     </Grid>
@@ -195,7 +195,7 @@ function Stake() {
 
                                             {view === 0 && (
                                                 <div className="stake-card-tab-panel">
-                                                    {address && hasAllowance("time") ? (
+                                                    {address && hasAllowance("mgna") ? (
                                                         <div
                                                             className="stake-card-tab-panel-btn"
                                                             onClick={() => {
@@ -210,7 +210,7 @@ function Stake() {
                                                             className="stake-card-tab-panel-btn"
                                                             onClick={() => {
                                                                 if (isPendingTxn(pendingTransactions, "approve_staking")) return;
-                                                                onSeekApproval("time");
+                                                                onSeekApproval("mgna");
                                                             }}
                                                         >
                                                             <p>{txnButtonText(pendingTransactions, "approve_staking", "Approve")}</p>
@@ -221,7 +221,7 @@ function Stake() {
 
                                             {view === 1 && (
                                                 <div className="stake-card-tab-panel">
-                                                    {address && hasAllowance("memo") ? (
+                                                    {address && hasAllowance("xmgna") ? (
                                                         <div
                                                             className="stake-card-tab-panel-btn"
                                                             onClick={() => {
@@ -236,7 +236,7 @@ function Stake() {
                                                             className="stake-card-tab-panel-btn"
                                                             onClick={() => {
                                                                 if (isPendingTxn(pendingTransactions, "approve_unstaking")) return;
-                                                                onSeekApproval("memo");
+                                                                onSeekApproval("xmgna");
                                                             }}
                                                         >
                                                             <p>{txnButtonText(pendingTransactions, "approve_unstaking", "Approve")}</p>
@@ -247,7 +247,7 @@ function Stake() {
                                         </div>
 
                                         <div className="stake-card-action-help-text">
-                                            {address && ((!hasAllowance("time") && view === 0) || (!hasAllowance("memo") && view === 1)) && (
+                                            {address && ((!hasAllowance("mgna") && view === 0) || (!hasAllowance("xmgna") && view === 1)) && (
                                                 <p>
                                                     Note: The "Approve" transaction is only needed when staking/unstaking for the first time; subsequent staking/unstaking only
                                                     requires you to perform the "Stake" or "Unstake" transaction.

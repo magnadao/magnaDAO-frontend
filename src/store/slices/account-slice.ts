@@ -33,7 +33,7 @@ export const getBalances = createAsyncThunk("account/getBalances", async ({ addr
     const memoBalance = await memoContract.balanceOf(address);
     const timeContract = new ethers.Contract(addresses.TIME_ADDRESS, abi, provider);
     const timeBalance = await timeContract.balanceOf(address);
-    const wmemoContract = new ethers.Contract(addresses.WMEMO_ADDRESS, wMemoTokenContract, provider);
+    const wmemoContract = new ethers.Contract(addresses.WMEMO_ADDRESS, abi, provider);
     const wmemoBalance = await wmemoContract.balanceOf(address);
 
     console.warn(timeBalance);
@@ -80,7 +80,7 @@ export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails",
 
     const addresses = getAddresses(networkID);
 
-    const abi = ["function balanceOf(address) view returns (uint)", "function allowance(address, address) external view returns (uint)"];
+    const abi = ["function balanceOf(address) view returns (uint)", "function allowance(address, address) view returns (uint)"];
 
     if (addresses.TIME_ADDRESS) {
         const timeContract = new ethers.Contract(addresses.TIME_ADDRESS, abi, provider);
@@ -233,10 +233,8 @@ export const calculateUserTokenDetails = createAsyncThunk("account/calculateUser
 
     let allowance,
         balance = "0";
-
-    allowance = await tokenContract.allowance(address, addresses.ZAPIN_ADDRESS);
-    balance = await tokenContract.balanceOf(address);
-
+    //allowance = await tokenContract.allowance(address, addresses.ZAPIN_ADDRESS);
+    //balance = await tokenContract.balanceOf(address);
     const balanceVal = Number(balance) / Math.pow(10, token.decimals);
 
     return {

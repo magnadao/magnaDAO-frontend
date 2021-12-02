@@ -58,6 +58,7 @@ export const changeApproval = createAsyncThunk("stake/changeApproval", async ({ 
 
     await sleep(2);
 
+    console.warn("Getting allowance");
     const stakeAllowance = await timeContract.allowance(address, addresses.STAKING_HELPER_ADDRESS);
     const unstakeAllowance = await memoContract.allowance(address, addresses.STAKING_ADDRESS);
 

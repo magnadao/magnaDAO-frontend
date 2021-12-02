@@ -81,7 +81,7 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
     const trimmedMemoBalance = trim(Number(memoBalance), 6);
     const trimmedWmemoBalance = trim(Number(wmemoBalance), 6);
 
-    const getBalance = () => (isWrap ? `${trimmedMemoBalance} MEMO` : `${trimmedWmemoBalance} wMEMO`);
+    const getBalance = () => (isWrap ? `${trimmedMemoBalance} xMGNA` : `${trimmedWmemoBalance} xWMGNA`);
 
     const handleOnWrap = async () => {
         if (await checkWrongNetwork()) return;
@@ -125,7 +125,7 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
                         startAdornment={
                             <InputAdornment position="start">
                                 <div className="wrap-action-input-text">
-                                    <p>{isWrap ? "MEMO" : "wMEMO"}</p>
+                                    <p>{isWrap ? "xMGNA" : "xWMGNA"}</p>
                                 </div>
                             </InputAdornment>
                         }
@@ -152,7 +152,7 @@ function Wrap({ open, handleClose }: IAdvancedSettingsProps) {
                         startAdornment={
                             <InputAdornment position="start">
                                 <div className="wrap-action-input-text">
-                                    <p>{isWrap ? "wMEMO" : "MEMO"}</p>
+                                    <p>{isWrap ? "xWMGNA" : "xMGNA"}</p>
                                 </div>
                             </InputAdornment>
                         }
