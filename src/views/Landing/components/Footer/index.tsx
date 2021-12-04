@@ -11,7 +11,7 @@ function Footer() {
     const stakingAPY = useSelector<IReduxState, number>(state => {
         return state.app.totalSupply;
     });
-    console.log("React:", stakingAPY);
+
     const treasuryBalance = useSelector<IReduxState, number>(state => {
         return state.app.treasuryBalance;
     });

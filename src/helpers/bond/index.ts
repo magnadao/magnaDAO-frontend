@@ -22,7 +22,7 @@ export const dai = new StableBond({
             reserveAddress: "0xFC71D138190a349A80A892914B2eee648B9F95d2",
         },
         [Networks.FUJI]: {
-            bondAddress: "0x694738E0A438d90487b4a549b201142c1a97B556",
+            bondAddress: "0x04C19AdBC2b1af2d5d7d5F7d04364D74Fa4edA78",
             reserveAddress: "0xFC71D138190a349A80A892914B2eee648B9F95d2",
         },
     },

@@ -34,11 +34,11 @@ export const loadAppDetails = createAsyncThunk(
         const stakingTVL = circSupply * marketPrice;
         const marketCap = totalSupply * marketPrice;
 
-        /*const tokenBalPromises = allBonds.map(bond => bond.getTreasuryBalance(networkID, provider));
+        const tokenBalPromises = allBonds.map(bond => bond.getTreasuryBalance(networkID, provider));
         const tokenBalances = await Promise.all(tokenBalPromises);
         const treasuryBalance = tokenBalances.reduce((tokenBalance0, tokenBalance1) => tokenBalance0 + tokenBalance1, 0);
 
-        const tokenAmountsPromises = allBonds.map(bond => bond.getTokenAmount(networkID, provider));
+        /*const tokenAmountsPromises = allBonds.map(bond => bond.getTokenAmount(networkID, provider));
         const tokenAmounts = await Promise.all(tokenAmountsPromises);
         const rfvTreasury = tokenAmounts.reduce((tokenAmount0, tokenAmount1) => tokenAmount0 + tokenAmount1, 0);
 
@@ -46,7 +46,6 @@ export const loadAppDetails = createAsyncThunk(
         const timeBondsAmounts = await Promise.all(timeBondsAmountsPromises);
         const timeAmount = timeBondsAmounts.reduce((timeAmount0, timeAmount1) => timeAmount0 + timeAmount1, 0);
         const timeSupply = totalSupply - timeAmount;
-        
         const rfv = rfvTreasury / timeSupply;*/
 
         const epoch = await stakingContract.epoch();
@@ -69,7 +68,7 @@ export const loadAppDetails = createAsyncThunk(
             currentBlock,
             circSupply,
             fiveDayRate,
-            //treasuryBalance,
+            treasuryBalance,
             stakingAPY,
             stakingTVL,
             stakingRebase,

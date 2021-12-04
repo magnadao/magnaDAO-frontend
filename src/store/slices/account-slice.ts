@@ -36,8 +36,6 @@ export const getBalances = createAsyncThunk("account/getBalances", async ({ addr
     const wmemoContract = new ethers.Contract(addresses.WMEMO_ADDRESS, abi, provider);
     const wmemoBalance = await wmemoContract.balanceOf(address);
 
-    console.warn(timeBalance);
-    console.warn(memoBalance);
     return {
         balances: {
             memo: ethers.utils.formatUnits(memoBalance, "gwei"),
@@ -85,7 +83,6 @@ export const loadAccountDetails = createAsyncThunk("account/loadAccountDetails",
     if (addresses.TIME_ADDRESS) {
         const timeContract = new ethers.Contract(addresses.TIME_ADDRESS, abi, provider);
         timeBalance = await timeContract.balanceOf(address);
-        console.log(timeBalance);
         stakeAllowance = await timeContract.allowance(address, addresses.STAKING_HELPER_ADDRESS);
     }
 
