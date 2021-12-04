@@ -56,11 +56,16 @@ export class LPBond extends Bond {
         const addresses = getAddresses(networkID);
 
         const token = this.getContractForReserve(networkID, provider);
-
-        let [reserve0, reserve1] = await token.getReserves();
-        const token1: string = await token.token1();
-        const isTime = token1.toLowerCase() === addresses.TIME_ADDRESS.toLowerCase();
-
+        let reserve0, reserve1;
+        let token1: string;
+        let isTime;
+        try {
+            [reserve0, reserve1] = await token.getReserves();
+            token1 = await token.token1();
+            isTime = token1.toLowerCase() === addresses.TIME_ADDRESS.toLowerCase();
+        } catch(err) {
+            return 0;
+        }
         return isToken ? this.toTokenDecimal(false, isTime ? reserve0 : reserve1) : this.toTokenDecimal(true, isTime ? reserve1 : reserve0);
     }
 

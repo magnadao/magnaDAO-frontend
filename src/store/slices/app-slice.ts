@@ -38,7 +38,7 @@ export const loadAppDetails = createAsyncThunk(
         const tokenBalances = await Promise.all(tokenBalPromises);
         const treasuryBalance = tokenBalances.reduce((tokenBalance0, tokenBalance1) => tokenBalance0 + tokenBalance1, 0);
 
-        /*const tokenAmountsPromises = allBonds.map(bond => bond.getTokenAmount(networkID, provider));
+        const tokenAmountsPromises = allBonds.map(bond => bond.getTokenAmount(networkID, provider));
         const tokenAmounts = await Promise.all(tokenAmountsPromises);
         const rfvTreasury = tokenAmounts.reduce((tokenAmount0, tokenAmount1) => tokenAmount0 + tokenAmount1, 0);
 
@@ -46,7 +46,7 @@ export const loadAppDetails = createAsyncThunk(
         const timeBondsAmounts = await Promise.all(timeBondsAmountsPromises);
         const timeAmount = timeBondsAmounts.reduce((timeAmount0, timeAmount1) => timeAmount0 + timeAmount1, 0);
         const timeSupply = totalSupply - timeAmount;
-        const rfv = rfvTreasury / timeSupply;*/
+        const rfv = rfvTreasury / timeSupply;
 
         const epoch = await stakingContract.epoch();
         const stakingReward = epoch.distribute;
@@ -58,8 +58,8 @@ export const loadAppDetails = createAsyncThunk(
         const currentIndex = await stakingContract.index();
         const nextRebase = epoch.endTime;
 
-        //const treasuryRunway = rfvTreasury / circSupply;
-        //const runway = Math.log(treasuryRunway) / Math.log(1 + stakingRebase) / 3;
+        const treasuryRunway = rfvTreasury / circSupply;
+        const runway = Math.log(treasuryRunway) / Math.log(1 + stakingRebase) / 3;
 
         return {
             currentIndex: Number(ethers.utils.formatUnits(currentIndex, "gwei")) / 4.5,
@@ -75,8 +75,8 @@ export const loadAppDetails = createAsyncThunk(
             marketPrice,
             currentBlockTime,
             nextRebase,
-            //rfv,
-            //runway,
+            rfv,
+            runway,
         };
     },
 );
