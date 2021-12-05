@@ -56,7 +56,6 @@ export const swithNetwork = async () => {
     if (window.ethereum) {
         try {
             console.warn("Trying switch ()");
-            await addChainRequest();
             await switchRequest();
         } catch (error: any) {
             if (error.code === 4902) {

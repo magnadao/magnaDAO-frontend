@@ -115,12 +115,11 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
     };
 
     const connect = useCallback(async () => {
-        const rawProvider = window.ethereum;
+        const rawProvider = await web3Modal.connect();
 
         _initListeners(rawProvider);
 
-        console.log(rawProvider);
-        const connectedProvider = new Web3Provider(rawProvider);
+        const connectedProvider = new Web3Provider(rawProvider, "any");
         const chainId = await connectedProvider.getNetwork().then(network => Number(network.chainId));
         const connectedAddress = await connectedProvider.getSigner().getAddress();
         const validNetwork = changeNetwork(chainId);
@@ -130,15 +129,13 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
             return;
         }
         setAddress(connectedAddress);
-        setProvider(connectedProvider);
+        //setProvider(connectedProvider);
         setProviderChainID(chainId);
-        /*
-        if (chainId === Networks.AVAX) {
+        
+        if (chainId === DEFAULD_NETWORK) {
             setProvider(connectedProvider);
-        } else if (chainId === TESTNET_NETWORK) {
-            setProvider(connectedProvider);
-        }
-*/
+        } 
+
         setConnected(true);
 
         return connectedProvider;

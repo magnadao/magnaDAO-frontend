@@ -34,16 +34,16 @@ export const changeApproval = createAsyncThunk("stake/changeApproval", async ({ 
     try {
         const gasPrice = await getGasPrice(provider);
 
-        if (token === "time") {
+        if (token === "mgna") {
             approveTx = await timeContract.approve(addresses.STAKING_HELPER_ADDRESS, ethers.constants.MaxUint256, { gasPrice });
         }
 
-        if (token === "memo") {
+        if (token === "xmgna") {
             approveTx = await memoContract.approve(addresses.STAKING_ADDRESS, ethers.constants.MaxUint256, { gasPrice });
         }
 
-        const text = "Approve " + (token === "time" ? "Staking" : "Unstaking");
-        const pendingTxnType = token === "time" ? "approve_staking" : "approve_unstaking";
+        const text = "Approve " + (token === "mgna" ? "Staking" : "Unstaking");
+        const pendingTxnType = token === "mgna" ? "approve_staking" : "approve_unstaking";
 
         dispatch(fetchPendingTxns({ txnHash: approveTx.hash, text, type: pendingTxnType }));
         await approveTx.wait();

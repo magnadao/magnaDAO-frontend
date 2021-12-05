@@ -61,10 +61,8 @@ function Stake() {
     const setMax = () => {
         if (view === 0) {
             setQuantity(timeBalance);
-            console.log(timeBalance);
         } else {
             setQuantity(memoBalance);
-            console.log(memoBalance);
         }
     };
 
